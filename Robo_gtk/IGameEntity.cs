@@ -7,6 +7,6 @@ namespace Robo
 		bool Visible { get; set; }
 		Game Game { get; }
 		void Draw(Painter painter);
-		void Initialize(Game game);
+		void Initialize();
 	}
 }

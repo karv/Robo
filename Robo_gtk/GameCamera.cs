@@ -2,7 +2,7 @@
 
 namespace Robo
 {
-	public class ConsoleCamera
+	public class GameCamera
 	{
 		public Point Offset { get; set; }
 	}

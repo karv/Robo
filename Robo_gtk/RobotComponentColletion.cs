@@ -3,17 +3,22 @@ using System.Collections.Generic;
 
 namespace Robo
 {
+	/// Collection of robot components.
 	public class RobotComponentColletion
 	{
+		/// Gets the robot associated to this collection.
 		public Robot Robot { get; }
-		List<IRobotComponent> _pieces { get; }
+		List<RobotComponent> _pieces { get; }
+
+		/// Initializes a new instance of the <see cref="RobotComponentColletion"/> class.
 		public RobotComponentColletion(Robot robot)
 		{
 			Robot = robot;
-			_pieces = new List<IRobotComponent>();
+			_pieces = new List<RobotComponent>();
 		}
 
-		public void Attach(IRobotComponent component)
+		/// Attach the specified component.
+		public void Attach(RobotComponent component)
 		{
 			if (component.Owner != null) throw new InvalidOperationException("Cannot attach an owned component.");
 
@@ -21,7 +26,8 @@ namespace Robo
 			_pieces.Add(component);
 		}
 
-		public void Detach(IRobotComponent component)
+		/// Detach the specified component.
+		public void Detach(RobotComponent component)
 		{
 			if (component is null) throw new ArgumentNullException(nameof(component));
 			if (component.Owner is null) throw new InvalidOperationException("Item already detached.");
