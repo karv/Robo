@@ -1,0 +1,33 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robo", "Robo.csproj", "{3A32E8AE-AF54-4671-AC34-AF3FA5761D29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboLib", "RoboLib\RoboLib.csproj", "{7C305099-C98D-4231-A507-14CFFF700A1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A32E8AE-AF54-4671-AC34-AF3FA5761D29}.Debug|x86.ActiveCfg = Debug|x86
+		{3A32E8AE-AF54-4671-AC34-AF3FA5761D29}.Debug|x86.Build.0 = Debug|x86
+		{3A32E8AE-AF54-4671-AC34-AF3FA5761D29}.Release|x86.ActiveCfg = Release|x86
+		{3A32E8AE-AF54-4671-AC34-AF3FA5761D29}.Release|x86.Build.0 = Release|x86
+		{7C305099-C98D-4231-A507-14CFFF700A1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C305099-C98D-4231-A507-14CFFF700A1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{7C305099-C98D-4231-A507-14CFFF700A1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C305099-C98D-4231-A507-14CFFF700A1E}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 150
+		$1.TabWidth = 2
+		$1.IndentWidth = 2
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
