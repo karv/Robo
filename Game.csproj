@@ -42,7 +42,6 @@
     <Compile Include="Game.cs" />
     <Compile Include="EntityCollection.cs" />
     <Compile Include="CollisionChecker.cs" />
-    <Compile Include="LineControl.cs" />
     <Compile Include="BattleScreen.cs" />
     <Compile Include="DeployedRobot.cs" />
     <Compile Include="Battlefield.cs" />
