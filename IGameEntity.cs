@@ -1,4 +1,5 @@
-﻿using CE;
+﻿using MonoGame.Extended;
+
 namespace Robo
 {
 	public interface IGameEntity : Moggle.IDrawable

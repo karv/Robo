@@ -42,6 +42,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="EntityCollection.cs" />
     <Compile Include="CollisionChecker.cs" />
+    <Compile Include="LineControl.cs" />
+    <Compile Include="BattleScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

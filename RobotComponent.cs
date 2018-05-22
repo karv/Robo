@@ -1,4 +1,5 @@
 ﻿using CE;
+using Microsoft.Xna.Framework;
 namespace Robo
 {
 	/// A component of a robot.
@@ -6,8 +7,8 @@ namespace Robo
 	{
 		/// Gets the robot owner.
 		public Robot Owner { get; internal set; }
-		public PointF RelativePosition { get; set; }
-		public PointF AbsolutePosition => new PointF(RelativePosition.X + Owner.Position.Left, RelativePosition.Y + Owner.Position.Top);
+		public Vector2 RelativeUndeployedPosition { get; set; }
+		//public Vector2 AbsolutePosition => RelativePosition + Owner. new PointF(RelativePosition.X + Owner.Position.Left, RelativePosition.Y + Owner.Position.Top);
 
 		/// Detach this components from its robot.
 		public void Detach() => Owner.Componets.Detach(this);

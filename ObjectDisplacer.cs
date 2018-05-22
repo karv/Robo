@@ -1,5 +1,6 @@
 ﻿using System;
 using CE;
+using Microsoft.Xna.Framework;
 
 namespace Robo
 {
@@ -13,10 +14,11 @@ namespace Robo
 		}
 
 
-		public void Displace(IGameEntity entity, PointF vector, bool continuous = false)
+		public void Displace(IGameEntity entity, Vector2 vector, bool continuous = false)
 		{
 			// TODO: do checks
-			entity.Position = new RectangleF(new PointF(entity.Position.Left + vector.X, entity.Position.Top + vector.Y), entity.Position.Size);
+			entity.Position.Offset(vector);
+			//entity.Position = new RectangleF(new PointF(entity.Position.Left + vector.X, entity.Position.Top + vector.Y), entity.Position..Size);
 		}
 	}
 }

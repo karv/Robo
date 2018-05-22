@@ -1,9 +1,15 @@
-﻿using CE;
+﻿using MonoGame.Extended;
 
 namespace Robo
 {
-	public class GameCamera
+	public class GameCamera : Camera2D
 	{
-		public Point Offset { get; set; }
+		public GameCamera(Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice) : base(graphicsDevice)
+		{
+		}
+
+		public GameCamera(MonoGame.Extended.ViewportAdapters.ViewportAdapter viewportAdapter) : base(viewportAdapter)
+		{
+		}
 	}
 }

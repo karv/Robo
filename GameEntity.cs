@@ -1,10 +1,11 @@
-﻿using CE;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using Microsoft.Xna.Framework;
 
 namespace Robo
 {
 	/// Base class for common game entity : <see cref="IGameEntity"/>
-	public abstract class GameEntity : IGameEntity
+	public abstract class GameEntity : IGameEntity, Moggle.IDrawable
 	{
 		/// Gets the <see cref="Game"/>class.
 		public Game Game { get; internal set; }
@@ -16,7 +17,7 @@ namespace Robo
 		/// Initialize this object.
 		public virtual void Initialize() { }
 
-		public virtual void Displace(PointF delta) => Game.Displacer.Displace(this, delta);
+		public virtual void Displace(Vector2 delta) => Game.Displacer.Displace(this, delta);
 
 		/// Draw using the specified <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch" />.
 		public abstract void Draw(SpriteBatch batch);
