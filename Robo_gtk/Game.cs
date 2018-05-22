@@ -1,14 +1,22 @@
-﻿namespace Robo
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+namespace Robo
 {
 	/// Main game class
-	public class Game
+	public class Game : Moggle.Game
 	{
+		public GraphicsDeviceManager Graphics { get; }
+		public CollisionChecker CollitionChecker;
+		public ObjectDisplacer Displacer;
+
 		/// Gets the collection of entities.
 		public EntityCollection Entities { get; }
 
-		/// Initialize.
-		public void Initialize()
-		{ InitializeRegisteredEntities(); }
+		protected override void Initialize()
+		{
+			base.Initialize();
+			InitializeRegisteredEntities();
+		}
 
 		/// Initialize all entities in <see cref="Entities"/>.
 		protected void InitializeRegisteredEntities()
@@ -16,6 +24,9 @@
 
 		/// Initializes a new instance of the <see cref="Game"/> class.
 		public Game()
-		{ Entities = new EntityCollection(); }
+		{
+			Entities = new EntityCollection();
+			Graphics = new GraphicsDeviceManager(this);
+		}
 	}
 }

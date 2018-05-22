@@ -1,12 +1,10 @@
 ﻿using CE;
 namespace Robo
 {
-	public interface IGameEntity
+	public interface IGameEntity : Moggle.IDrawable
 	{
 		bool Visible { get; set; }
 		Game Game { get; }
-		void Draw(Painter painter);
-		void Initialize();
 		RectangleF Position { get; set; }
 	}
 }

@@ -12,8 +12,7 @@
 			Componets = new RobotComponentColletion(this);
 		}
 
-		/// Draw this robot and all its components using the specified <see cref="Painter" />.
-		public override void Draw(Painter painter)
+		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
 		{
 			throw new System.NotImplementedException();
 		}

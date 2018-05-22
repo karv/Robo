@@ -1,4 +1,5 @@
 ﻿using CE;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Robo
 {
@@ -12,11 +13,12 @@ namespace Robo
 
 		public RectangleF Position { get; set; }
 
-		/// Draw this entity using the specified <see cref="Painter"/>.
-		public abstract void Draw(Painter painter);
 		/// Initialize this object.
 		public virtual void Initialize() { }
 
 		public virtual void Displace(PointF delta) => Game.Displacer.Displace(this, delta);
+
+		/// Draw using the specified <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch" />.
+		public abstract void Draw(SpriteBatch batch);
 	}
 }
