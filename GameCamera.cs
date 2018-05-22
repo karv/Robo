@@ -1,15 +1,22 @@
 ﻿using MonoGame.Extended;
+using Microsoft.Xna.Framework;
 
 namespace Robo
 {
 	public class GameCamera : Camera2D
 	{
-		public GameCamera(Microsoft.Xna.Framework.Graphics.GraphicsDevice graphicsDevice) : base(graphicsDevice)
-		{
-		}
-
+		public Vector2 DefaultPosition { get; }
+		public float DefaultZoom { get; }
 		public GameCamera(MonoGame.Extended.ViewportAdapters.ViewportAdapter viewportAdapter) : base(viewportAdapter)
 		{
+			DefaultPosition = Position;
+			DefaultZoom = Zoom;
+		}
+
+		public void Reset()
+		{
+			Position = DefaultPosition;
+			Zoom = DefaultZoom;
 		}
 	}
 }

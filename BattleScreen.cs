@@ -22,12 +22,33 @@ namespace Robo
 			base.DoInitialization();
 			BatchOpts.Transformatrix = Camera.GetViewMatrix;
 			KeyboardListener.KeyPressed += KeyboardListener_KeyPressed;
+
+			DeployRobots();
+		}
+
+		void DeployRobots()
+		{
+			var robo = new Robot();
+			var roboDeploy = new DeployedRobot(robo, this);
+			Battlefield.Robots.Add(roboDeploy);
 		}
 
 		void KeyboardListener_KeyPressed(object sender, KeyboardEventArgs e)
 		{
-			if (e.Key == Microsoft.Xna.Framework.Input.Keys.Escape)
-				Game.Exit();
+			switch (e.Key)
+			{
+				case Microsoft.Xna.Framework.Input.Keys.Escape:
+					Game.Exit();
+					break;
+				case Microsoft.Xna.Framework.Input.Keys.Enter:
+					// Zoom 2x on first entity.
+					Camera.LookAt(Battlefield.Robots[0].Position.Center);
+					Camera.Zoom *= 1.1f;
+					break;
+				case Microsoft.Xna.Framework.Input.Keys.Space:
+					Camera.Reset();
+					break;
+			}
 		}
 	}
 }
