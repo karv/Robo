@@ -46,6 +46,9 @@
     <Compile Include="DeployedRobot.cs" />
     <Compile Include="Battlefield.cs" />
     <Compile Include="RandomService.cs" />
+    <Compile Include="RobotLaserCannon.cs" />
+    <Compile Include="ResourceType.cs" />
+    <Compile Include="ResourceManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

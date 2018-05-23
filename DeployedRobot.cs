@@ -11,7 +11,7 @@ namespace Robo
 		public Robot Robot { get; }
 		public Battlefield Battlefield => Screen.Battlefield;
 		public BattleScreen Screen { get; }
-
+		public ResourceManager Resources { get; }
 		public DeployedRobot(Robot robot, BattleScreen screen)
 		{
 			Color = Color.Red;
@@ -20,6 +20,8 @@ namespace Robo
 			// TODO: No magic numbers.
 			var topLeft = new Point2(RandomService.Rnd.NextSingle(0, Battlefield.BattleArea.Right), Battlefield.BattleArea.Bottom - Size.Height);
 			Position = new RectangleF(topLeft, Size);
+
+			Resources = new ResourceManager();
 		}
 
 		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
