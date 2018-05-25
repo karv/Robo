@@ -1,11 +1,13 @@
 ﻿using Moggle.Screens;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.ViewportAdapters;
+using System.Diagnostics;
 
 namespace Robo
 {
 	public class BattleScreen : ListenerScreen
 	{
+		DeployedRobotLaserCannon _temporalCmp;
 		public GameCamera Camera { get; private set; }
 		public Battlefield Battlefield { get; }
 		public BattleScreen(Moggle.Game game) : base(game)
@@ -29,9 +31,14 @@ namespace Robo
 		void DeployRobots()
 		{
 			var robo = new Robot();
-			robo.Componets.Add(new RobotLaserCannon("LR01"));
+			var temporalCmp = new RobotLaserCannon("LR01");
+			robo.Componets.Add(temporalCmp);
 			var roboDeploy = new DeployedRobot(robo, this);
-			Battlefield.Robots.Add(roboDeploy);
+			_temporalCmp = (DeployedRobotLaserCannon)roboDeploy.GetComponent("LR01");
+
+			roboDeploy.PutInBattlefield();
+
+			_temporalCmp.AimReachedTarget += (sender, e) => Debug.WriteLine("Aim target reached.");
 		}
 
 		void KeyboardListener_KeyPressed(object sender, KeyboardEventArgs e)
@@ -48,6 +55,14 @@ namespace Robo
 					break;
 				case Microsoft.Xna.Framework.Input.Keys.Space:
 					Camera.Reset();
+					break;
+
+				// Temporal keys
+				case Microsoft.Xna.Framework.Input.Keys.Up:
+					_temporalCmp.TargetAim -= 1;
+					break;
+				case Microsoft.Xna.Framework.Input.Keys.Down:
+					_temporalCmp.TargetAim += 1;
 					break;
 			}
 		}

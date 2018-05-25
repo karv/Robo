@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
+using System.Linq;
 
 namespace Robo
 {
@@ -31,19 +32,32 @@ namespace Robo
 			foreach (var cmp in Robot.Componets)
 			{
 				var deploy = cmp.CreateDeploy(this);
-				deploy.Initialize();
 				_parts.Add(deploy);
 			}
+		}
 
+		/// Adds this robot into the battlefield, initializes all the required components, and add it into the screen draw and update list.
+		public void PutInBattlefield()
+		{
+			//Initialize();
+			Screen.AddComponent(this);
+			foreach (var c in _parts) Screen.AddComponent(c);
+
+			Battlefield.Robots.Add(this);
+		}
+
+		public override void Initialize()
+		{ foreach (var c in _parts) c.Initialize(); }
+
+		public IDeployedRobotComponent GetComponent(string id)
+		{
+			// TODO: existence check.
+			return _parts.First(z => string.Equals(z.Prototype.Name, id, StringComparison.InvariantCultureIgnoreCase));
 		}
 
 		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
 		{
 			batch.FillRectangle(Position, Color);
-
-			// Draw components
-			foreach (var comp in _parts)
-				comp.Draw(batch);
 		}
 
 		public static Size2 Size { get; }

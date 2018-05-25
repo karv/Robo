@@ -9,6 +9,20 @@ namespace Robo
 	{
 		public RobotLaserCannon Prototype { get; }
 		public DeployedRobot Robot { get; }
+		public float CurrentAim { get; private set; }
+		public float TargetAim { get; set; } // TODO: Force value between -pi and pi
+
+		public bool AimOnTarget
+		{
+			get => _aimOnTarget;
+			private set
+			{
+				if (_aimOnTarget == value) return;
+				_aimOnTarget = value;
+				if (value) AimReachedTarget?.Invoke(this, EventArgs.Empty);
+			}
+		}
+
 		RobotComponent IDeployedRobotComponent.Prototype => Prototype;
 
 		public DeployedRobotLaserCannon(DeployedRobot robot, RobotLaserCannon prototype)
@@ -41,14 +55,36 @@ namespace Robo
 
 		void Moggle.IDrawable.Draw(SpriteBatch batch)
 		{
-			batch.DrawCircle(Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft, Radius, Sides, Color, Thickness);
+			var center = Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft;
+			batch.DrawCircle(center, Radius, Sides, Color, Thickness);
+			batch.DrawLine(center, AimLength, CurrentAim, Color, Thickness);
 		}
 
-		void IGameComponent.Initialize() { }
+		void IGameComponent.Initialize()
+		{
+			CurrentAim = TargetAim;
+			AimOnTarget = true;
+		}
+
+		void IUpdate.Update(GameTime gameTime)
+		{
+			var maxAimDelta = (float)gameTime.ElapsedGameTime.TotalSeconds * AimRotationSpeed;
+			AimOnTarget = Math.Abs(TargetAim - CurrentAim) < maxAimDelta;
+			if (!AimOnTarget)
+				// Check for best direction (use S_1 metric)
+				CurrentAim += TargetAim > CurrentAim ? maxAimDelta : -maxAimDelta;
+		}
+
+		/// Occurs when aim reached its target rotation.
+		public event EventHandler AimReachedTarget;
+		bool _aimOnTarget;
 
 		public const float Radius = 30;
+		public const float AimLength = 40;
 		public const int Sides = 10;
 		public const int Thickness = 10;
-		public static Color Color { get; } = Color.Black;
+		public const float AimRotationSpeed = 1f;
+
+		public static Color Color => Color.DarkBlue;
 	}
 }
