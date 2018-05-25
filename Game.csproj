@@ -48,7 +48,7 @@
     <Compile Include="RandomService.cs" />
     <Compile Include="RobotLaserCannon.cs" />
     <Compile Include="ResourceType.cs" />
-    <Compile Include="ResourceManager.cs" />
+    <Compile Include="RobotResourceManager.cs" />
     <Compile Include="IDeployedRobotComponent.cs" />
     <Compile Include="DeployedRobotLaserCannon.cs" />
     <Compile Include="IRobotComponent.cs" />

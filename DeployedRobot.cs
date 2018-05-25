@@ -12,7 +12,7 @@ namespace Robo
 		public Robot Robot { get; }
 		public Battlefield Battlefield => Screen.Battlefield;
 		public BattleScreen Screen { get; }
-		public ResourceManager Resources { get; }
+		public RobotResourceManager Resources { get; }
 		List<IDeployedRobotComponent> _parts { get; }
 
 		public DeployedRobot(Robot robot, BattleScreen screen)
@@ -24,7 +24,7 @@ namespace Robo
 			var topLeft = new Point2(RandomService.Rnd.NextSingle(0, Battlefield.BattleArea.Right), Battlefield.BattleArea.Bottom - Size.Height);
 			Position = new RectangleF(topLeft, Size);
 
-			Resources = new ResourceManager();
+			Resources = new RobotResourceManager();
 
 			// Generate the parts
 			_parts = new List<IDeployedRobotComponent>(Robot.Componets.Count);

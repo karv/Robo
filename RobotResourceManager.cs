@@ -1,9 +1,9 @@
 ﻿namespace Robo
 {
-	public class ResourceManager
+	public class RobotResourceManager
 	{
 		float[] _resources { get; }
-		public ResourceManager()
+		public RobotResourceManager()
 		{
 			_resources = new float[typeof(ResourceType).GetEnumNames().Length];
 		}
