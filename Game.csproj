@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{13A1DECB-E43A-4FC7-9E3F-B7CB83B20732}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Civo</RootNamespace>
+    <RootNamespace>Robo</RootNamespace>
     <AssemblyName>Game</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <ProductVersion>8.0.30703</ProductVersion>
@@ -49,6 +49,9 @@
     <Compile Include="RobotLaserCannon.cs" />
     <Compile Include="ResourceType.cs" />
     <Compile Include="ResourceManager.cs" />
+    <Compile Include="IDeployedRobotComponent.cs" />
+    <Compile Include="DeployedRobotLaserCannon.cs" />
+    <Compile Include="IRobotComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

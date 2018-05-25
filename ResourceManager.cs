@@ -10,7 +10,7 @@
 		public float this[ResourceType type]
 		{
 			get => _resources[(int)type];
-			set => _resources[(int)type] = value;;
+			set => _resources[(int)type] = value;
 		}
 	}
 }

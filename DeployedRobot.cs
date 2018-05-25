@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
@@ -12,6 +13,8 @@ namespace Robo
 		public Battlefield Battlefield => Screen.Battlefield;
 		public BattleScreen Screen { get; }
 		public ResourceManager Resources { get; }
+		List<IDeployedRobotComponent> _parts { get; }
+
 		public DeployedRobot(Robot robot, BattleScreen screen)
 		{
 			Color = Color.Red;
@@ -22,6 +25,16 @@ namespace Robo
 			Position = new RectangleF(topLeft, Size);
 
 			Resources = new ResourceManager();
+
+			// Generate the parts
+			_parts = new List<IDeployedRobotComponent>(Robot.Componets.Count);
+			foreach (var cmp in Robot.Componets)
+			{
+				var deploy = cmp.CreateDeploy(this);
+				deploy.Initialize();
+				_parts.Add(deploy);
+			}
+
 		}
 
 		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
