@@ -52,6 +52,9 @@
     <Compile Include="IDeployedRobotComponent.cs" />
     <Compile Include="DeployedRobotLaserCannon.cs" />
     <Compile Include="IRobotComponent.cs" />
+    <Compile Include="Projectile.cs" />
+    <Compile Include="InertialProjectile.cs" />
+    <Compile Include="SlowLaserBeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

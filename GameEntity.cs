@@ -21,5 +21,7 @@ namespace Robo
 
 		/// Draw using the specified <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch" />.
 		public abstract void Draw(SpriteBatch batch);
+
+		public virtual void Update(GameTime gameTime) { }
 	}
 }

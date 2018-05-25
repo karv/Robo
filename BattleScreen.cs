@@ -2,6 +2,8 @@
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.ViewportAdapters;
 using System.Diagnostics;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace Robo
 {
@@ -10,6 +12,8 @@ namespace Robo
 		DeployedRobotLaserCannon _temporalCmp;
 		public GameCamera Camera { get; private set; }
 		public Battlefield Battlefield { get; }
+		ICollection<IGameComponent> _removingComponents { get; } = new List<IGameComponent>();
+		ICollection<IGameComponent> _addingComponents { get; } = new List<IGameComponent>();
 		public BattleScreen(Moggle.Game game) : base(game)
 		{
 			ScreenViewport = new ScalingViewportAdapter(game.GraphicsDevice, 4000, 3000);
@@ -19,6 +23,18 @@ namespace Robo
 			AddComponent(Battlefield);
 		}
 
+		// TODO: Move to Moggle
+		public void RemoveWhenSafe(IGameComponent component)
+		{
+			_removingComponents.Add(component);
+		}
+
+		// TODO: Move to Moggle
+		public void AddWhenSafe(IGameComponent component)
+		{
+			_addingComponents.Add(component);
+		}
+
 		protected override void DoInitialization()
 		{
 			base.DoInitialization();
@@ -26,6 +42,18 @@ namespace Robo
 			KeyboardListener.KeyPressed += KeyboardListener_KeyPressed;
 
 			DeployRobots();
+		}
+
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+			foreach (var cmpt in _addingComponents)
+				AddComponent(cmpt);
+			foreach (var cmpt in _removingComponents)
+				DestroyComponents(cmpt);
+
+			_addingComponents.Clear();
+			_removingComponents.Clear();
 		}
 
 		void DeployRobots()
@@ -63,6 +91,9 @@ namespace Robo
 					break;
 				case Microsoft.Xna.Framework.Input.Keys.Down:
 					_temporalCmp.TargetAim += 1;
+					break;
+				case Microsoft.Xna.Framework.Input.Keys.Q:
+					_temporalCmp.Fire();
 					break;
 			}
 		}

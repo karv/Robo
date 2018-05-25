@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using System.Diagnostics;
 
 namespace Robo
 {
@@ -9,6 +10,7 @@ namespace Robo
 	{
 		public RobotLaserCannon Prototype { get; }
 		public DeployedRobot Robot { get; }
+		public Vector2 Center => Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft;
 		public float CurrentAim { get; private set; }
 		public float TargetAim { get; set; } // TODO: Force value between -pi and pi
 
@@ -31,6 +33,14 @@ namespace Robo
 			Prototype = prototype ?? throw new ArgumentNullException(nameof(prototype));
 		}
 
+		public float Fire()
+		{
+			var energyOutput = Robot.Resources[ResourceType.Energy];
+			Robot.Resources[ResourceType.Energy] = 0;
+			CreateAndFireBeam(energyOutput);
+			return energyOutput;
+		}
+
 		public float Fire(float maxEnergy)
 		{
 			var energyOutput = Math.Min(maxEnergy, Robot.Resources[ResourceType.Energy]);
@@ -39,23 +49,29 @@ namespace Robo
 			return energyOutput;
 		}
 
-		IGameEntity CreateLaserBeam(float energy)
+		SlowLaserBeam CreateLaserBeam(float energy)
 		{
-			// create Beam class.
-			// Initialize a new beam.
-			throw new NotImplementedException();
+			var ret = new SlowLaserBeam(Robot.Screen)
+			{
+				Energy = energy,
+				EnergyLoseRatio = 0.1f,
+				Direction = new Vector2((float)Math.Cos(CurrentAim), (float)Math.Sin(CurrentAim)),
+				Velocity = 400,
+				Position = Center
+			};
+			ret.Initialize();
+			return ret;
 		}
 
 		void CreateAndFireBeam(float energy)
 		{
 			var beam = CreateLaserBeam(energy);
-			// Add this beam to games entities.
-			throw new NotImplementedException();
+			beam.AddToBattlefield();
 		}
 
 		void Moggle.IDrawable.Draw(SpriteBatch batch)
 		{
-			var center = Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft;
+			var center = Center;
 			batch.DrawCircle(center, Radius, Sides, Color, Thickness);
 			batch.DrawLine(center, AimLength, CurrentAim, Color, Thickness);
 		}
@@ -73,6 +89,13 @@ namespace Robo
 			if (!AimOnTarget)
 				// Check for best direction (use S_1 metric)
 				CurrentAim += TargetAim > CurrentAim ? maxAimDelta : -maxAimDelta;
+			ResetEnergy();
+		}
+
+		[Conditional("DEBUG")]
+		void ResetEnergy(float newEnergy = 1)
+		{
+			Robot.Resources[ResourceType.Energy] = 1;
 		}
 
 		/// Occurs when aim reached its target rotation.

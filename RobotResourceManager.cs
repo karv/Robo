@@ -7,6 +7,7 @@
 		{
 			_resources = new float[typeof(ResourceType).GetEnumNames().Length];
 		}
+
 		public float this[ResourceType type]
 		{
 			get => _resources[(int)type];
