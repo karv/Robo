@@ -7,7 +7,6 @@ namespace Robo
 {
 	public class SlowLaserBeam : InertialProjectile
 	{
-
 		public float Energy
 		{
 			get => _energy;
@@ -17,7 +16,7 @@ namespace Robo
 				if (_energy <= 0)
 				{
 					Discipated?.Invoke(this, EventArgs.Empty);
-					Dispose();
+					Destroy();
 				}
 			}
 		}
@@ -38,7 +37,8 @@ namespace Robo
 			// Do not draw zero-speed beam.
 			if (Vector2.Zero == Direction) return;
 			var dir = (float)Math.Atan2(Direction.Y, Direction.X);
-			batch.DrawLine(Position, Length, dir, Color, Thickness);
+			var transparency = Energy < 1 ? Energy : 1;
+			batch.DrawLine(Position, Length, dir, Color * transparency, Thickness);
 		}
 
 		public override void Update(GameTime gameTime)

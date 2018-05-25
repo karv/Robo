@@ -54,11 +54,12 @@ namespace Robo
 			var ret = new SlowLaserBeam(Robot.Screen)
 			{
 				Energy = energy,
-				EnergyLoseRatio = 0.1f,
+				EnergyLoseRatio = 0.5f,
 				Direction = new Vector2((float)Math.Cos(CurrentAim), (float)Math.Sin(CurrentAim)),
 				Velocity = 400,
 				Position = Center
 			};
+			ret.Discipated += (sender, e) => Debug.WriteLine("Beam discipated");
 			ret.Initialize();
 			return ret;
 		}
@@ -95,7 +96,7 @@ namespace Robo
 		[Conditional("DEBUG")]
 		void ResetEnergy(float newEnergy = 1)
 		{
-			Robot.Resources[ResourceType.Energy] = 1;
+			Robot.Resources[ResourceType.Energy] = newEnergy;
 		}
 
 		/// Occurs when aim reached its target rotation.
