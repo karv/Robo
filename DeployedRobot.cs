@@ -40,6 +40,10 @@ namespace Robo
 		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
 		{
 			batch.FillRectangle(Position, Color);
+
+			// Draw components
+			foreach (var comp in _parts)
+				comp.Draw(batch);
 		}
 
 		public static Size2 Size { get; }

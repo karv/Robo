@@ -41,13 +41,14 @@ namespace Robo
 
 		void Moggle.IDrawable.Draw(SpriteBatch batch)
 		{
-			batch.DrawCircle(Prototype.RelativeUndeployedPosition, Radius, Sides, Color);
+			batch.DrawCircle(Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft, Radius, Sides, Color, Thickness);
 		}
 
 		void IGameComponent.Initialize() { }
 
-		public const float Radius = 10;
+		public const float Radius = 30;
 		public const int Sides = 10;
-		public static Color Color { get; } = Color.Red;
+		public const int Thickness = 10;
+		public static Color Color { get; } = Color.Black;
 	}
 }
