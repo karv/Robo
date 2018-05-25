@@ -29,6 +29,7 @@ namespace Robo
 		void DeployRobots()
 		{
 			var robo = new Robot();
+			robo.Componets.Add(new RobotLaserCannon("LR01"));
 			var roboDeploy = new DeployedRobot(robo, this);
 			Battlefield.Robots.Add(roboDeploy);
 		}

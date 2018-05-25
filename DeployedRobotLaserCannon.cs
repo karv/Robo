@@ -11,9 +11,10 @@ namespace Robo
 		public DeployedRobot Robot { get; }
 		RobotComponent IDeployedRobotComponent.Prototype => Prototype;
 
-		public DeployedRobotLaserCannon(DeployedRobot robot)
+		public DeployedRobotLaserCannon(DeployedRobot robot, RobotLaserCannon prototype)
 		{
 			Robot = robot ?? throw new ArgumentNullException(nameof(robot));
+			Prototype = prototype ?? throw new ArgumentNullException(nameof(prototype));
 		}
 
 		public float Fire(float maxEnergy)

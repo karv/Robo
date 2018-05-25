@@ -6,6 +6,6 @@
 		{
 		}
 
-		public override IDeployedRobotComponent CreateDeploy(DeployedRobot robot) => new DeployedRobotLaserCannon(robot);
+		public override IDeployedRobotComponent CreateDeploy(DeployedRobot robot) => new DeployedRobotLaserCannon(robot, this);
 	}
 }
