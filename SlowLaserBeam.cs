@@ -15,7 +15,7 @@ namespace Robo
 				_energy = value;
 				if (_energy <= 0)
 				{
-					Discipated?.Invoke(this, EventArgs.Empty);
+					Dissipated?.Invoke(this, EventArgs.Empty);
 					Destroy();
 				}
 			}
@@ -48,7 +48,7 @@ namespace Robo
 		}
 
 		/// Occurs when it lost all of its energy.
-		public event EventHandler Discipated;
+		public event EventHandler Dissipated;
 		float _energy;
 
 		public const float Length = 100;
