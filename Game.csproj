@@ -55,6 +55,9 @@
     <Compile Include="Projectile.cs" />
     <Compile Include="InertialProjectile.cs" />
     <Compile Include="SlowLaserBeam.cs" />
+    <Compile Include="BeamToRobotCollisionRule.cs" />
+    <Compile Include="ICollisionable.cs" />
+    <Compile Include="ICollisionRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

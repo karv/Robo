@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
-using System.Linq;
 
 namespace Robo
 {
 	/// A robot during combat.
-	public class DeployedRobot : GameEntity
+	public class DeployedRobot : GameEntity, ICollisionable
 	{
 		public Color Color { get; set; }
 		public Robot Robot { get; }
@@ -59,6 +59,10 @@ namespace Robo
 		{
 			batch.FillRectangle(Position, Color);
 		}
+
+		RectangleF ICollisionable.GetCollisionRectangle() => Position;
+
+		bool ICollisionable.ExistCollisionWith(ICollisionable other) => true; // Always collision in my box.
 
 		public static Size2 Size { get; }
 		static DeployedRobot()

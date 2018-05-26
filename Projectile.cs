@@ -6,7 +6,7 @@ using MonoGame.Extended;
 namespace Robo
 {
 	/// A common implementation for beam, projectile, or any other short-living disposable entity.
-	public abstract class Projectile : IGameEntity, IDisposable
+	public abstract class Projectile : IGameEntity, IDisposable, ICollisionable
 	{
 		public bool Visible { get; set; }
 
@@ -20,6 +20,9 @@ namespace Robo
 		}
 
 		public Vector2 Position { get; set; }
+		bool IGameEntity.Visible { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+		Game IGameEntity.Game => throw new NotImplementedException();
 
 		protected Projectile(BattleScreen screen)
 		{ Screen = screen ?? throw new ArgumentNullException(nameof(screen)); }
@@ -36,6 +39,8 @@ namespace Robo
 		}
 
 		public virtual RectangleF GetCollisionRectangle() => new RectangleF(Position, Size2.Empty);
+		public virtual bool ExistCollisionWith(ICollisionable other) => true;
+
 		public abstract void Draw(SpriteBatch batch);
 
 		public virtual void Initialize() { }

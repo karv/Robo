@@ -59,7 +59,7 @@ namespace Robo
 				Velocity = 400,
 				Position = Center
 			};
-			ret.Discipated += (sender, e) => Debug.WriteLine("Beam discipated");
+			ret.Dissipated += (sender, e) => Debug.WriteLine("Beam discipated");
 			ret.Initialize();
 			return ret;
 		}

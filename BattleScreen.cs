@@ -4,6 +4,7 @@ using MonoGame.Extended.ViewportAdapters;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Robo
 {
@@ -35,6 +36,8 @@ namespace Robo
 			_addingComponents.Add(component);
 		}
 
+		public IGameEntity[] CloneEntities() => Components.OfType<IGameEntity>().ToArray();
+		public ICollisionable[] CloneCollisionable() => Components.OfType<ICollisionable>().ToArray();
 		protected override void DoInitialization()
 		{
 			base.DoInitialization();
