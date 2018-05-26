@@ -21,7 +21,8 @@ namespace Robo
 			Camera = new GameCamera(ScreenViewport);
 			game.IsMouseVisible = true;
 			Battlefield = new Battlefield(this);
-			AddComponent(Battlefield);
+			//AddComponent(Battlefield);
+			AddComponent(new CollisionChecker(this));
 		}
 
 		// TODO: Move to Moggle
@@ -70,6 +71,8 @@ namespace Robo
 			roboDeploy.PutInBattlefield();
 
 			_temporalCmp.AimReachedTarget += (sender, e) => Debug.WriteLine("Aim target reached.");
+
+			new DeployedRobot(new Robot(), this).PutInBattlefield();
 		}
 
 		void KeyboardListener_KeyPressed(object sender, KeyboardEventArgs e)

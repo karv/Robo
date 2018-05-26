@@ -57,7 +57,8 @@ namespace Robo
 				EnergyLoseRatio = 0.5f,
 				Direction = new Vector2((float)Math.Cos(CurrentAim), (float)Math.Sin(CurrentAim)),
 				Velocity = 400,
-				Position = Center
+				Position = Center,
+				Origin = Robot
 			};
 			ret.Dissipated += (sender, e) => Debug.WriteLine("Beam discipated");
 			ret.Initialize();

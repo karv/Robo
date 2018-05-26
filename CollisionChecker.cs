@@ -14,6 +14,9 @@ namespace Robo
 		{
 			Screen = screen ?? throw new ArgumentNullException(nameof(screen));
 			Game = (Game)screen.Game;
+
+			// Add rules
+			_rules.Add(BeamToRobotCollisionRule.Rule);
 		}
 
 		public void RegisterNewRule(ICollisionRule rule) => _rules.Add(rule ?? throw new ArgumentNullException(nameof(rule)));

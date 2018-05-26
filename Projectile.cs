@@ -11,6 +11,7 @@ namespace Robo
 		public bool Visible { get; set; }
 
 		public Game Game => (Game)Screen.Game;
+		public DeployedRobot Origin { get; set; }
 		public BattleScreen Screen { get; }
 
 		RectangleF IGameEntity.Position
@@ -38,7 +39,7 @@ namespace Robo
 			Dispose();
 		}
 
-		public virtual RectangleF GetCollisionRectangle() => new RectangleF(Position, Size2.Empty);
+		public virtual RectangleF GetCollisionRectangle() => new RectangleF(Position, new Size2(1, 1));
 		public virtual bool ExistCollisionWith(ICollisionable other) => true;
 
 		public abstract void Draw(SpriteBatch batch);
