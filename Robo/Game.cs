@@ -22,11 +22,13 @@ namespace Robo
 			//var scr = thr.TopmostScreen;
 		}
 
-		/// Initialize all entities in <see cref="Entities"/>.
+		/// Initialize all entities.
 		protected void InitializeRegisteredEntities()
 		{ foreach (var entity in Entities) entity.Initialize(); }
 
-		/// Initializes a new instance of the <see cref="Game"/> class.
+		/// Initializes a new instance of the
+		/// <see cref="Game"/>
+		/// class.
 		public Game()
 		{
 			Entities = new EntityCollection();
