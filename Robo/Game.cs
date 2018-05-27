@@ -12,6 +12,20 @@ namespace Robo
 		/// Gets the collection of entities.
 		public EntityCollection Entities { get; }
 
+		///
+		public Game()
+		{
+			Content.RootDirectory = "Content";
+			Entities = new EntityCollection();
+			Graphics = new GraphicsDeviceManager(this);
+		}
+
+		protected override void LoadContent()
+		{
+			base.LoadContent();
+			Content.Load<Microsoft.Xna.Framework.Audio.SoundEffect>("laser pew");
+		}
+
 		protected override void Initialize()
 		{
 			base.Initialize();
@@ -25,14 +39,5 @@ namespace Robo
 		/// Initialize all entities.
 		protected void InitializeRegisteredEntities()
 		{ foreach (var entity in Entities) entity.Initialize(); }
-
-		/// Initializes a new instance of the
-		/// <see cref="Game"/>
-		/// class.
-		public Game()
-		{
-			Entities = new EntityCollection();
-			Graphics = new GraphicsDeviceManager(this);
-		}
 	}
 }
