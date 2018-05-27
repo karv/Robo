@@ -1,6 +1,8 @@
 ﻿#region Using Statements
+
 using System;
 using Robo;
+
 #if MONOMAC
 using MonoMac.AppKit;
 using MonoMac.Foundation;
@@ -8,24 +10,26 @@ using MonoMac.Foundation;
 using Foundation;
 using UIKit;
 #endif
-#endregion
 
-namespace Civo
+#endregion Using Statements
+
+namespace Robo
 {
 #if __IOS__ || __TVOS__
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
 #else
-	static class Program
+
+	public static class Program
 #endif
 	{
-		static Game game;
+		public static Game Game;
 
 		internal static void RunGame()
 		{
-			game.Run();
+			Game.Run();
 #if !__IOS__ && !__TVOS__
-			game.Dispose();
+			Game.Dispose();
 			Environment.Exit(0);
 #endif
 		}
@@ -34,13 +38,14 @@ namespace Civo
 		/// The main entry point for the application.
 		/// </summary>
 #if !MONOMAC && !__IOS__ && !__TVOS__
+
 		[STAThread]
 #endif
 		static void Main()
 		{
 			// Load data
 
-			game = new Game();
+			Game = new Game();
 #if MONOMAC
             NSApplication.Init ();
 
@@ -81,6 +86,6 @@ namespace Civo
         {
             return true;
         }
-    }  
+    }
 #endif
 }

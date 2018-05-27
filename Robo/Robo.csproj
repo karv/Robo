@@ -44,21 +44,33 @@
   <ItemGroup>
     <Compile Include="Battlefield.cs" />
     <Compile Include="BattleScreen.cs" />
+    <Compile Include="BeamToRobotCollisionRule.cs" />
     <Compile Include="CollisionChecker.cs" />
+    <Compile Include="CollisionRule.cs" />
     <Compile Include="DeployedRobot.cs" />
+    <Compile Include="DeployedRobotLaserCannon.cs" />
     <Compile Include="EntityCollection.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameCamera.cs" />
     <Compile Include="GameEntity.cs" />
+    <Compile Include="ICollisionable.cs" />
+    <Compile Include="ICollisionRule.cs" />
+    <Compile Include="IDeployedRobotComponent.cs" />
     <Compile Include="IGameEntity.cs" />
+    <Compile Include="InertialProjectile.cs" />
+    <Compile Include="IRobotComponent.cs" />
     <Compile Include="ObjectDisplacer.cs" />
-    <Compile Include="Painter.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomService.cs" />
+    <Compile Include="ResourceType.cs" />
     <Compile Include="Robot.cs" />
     <Compile Include="RobotComponent.cs" />
     <Compile Include="RobotComponentColletion.cs" />
+    <Compile Include="RobotLaserCannon.cs" />
+    <Compile Include="RobotResourceManager.cs" />
+    <Compile Include="SlowLaserBeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CE, Version=1.0.6700.29464, Culture=neutral, processorArchitecture=MSIL">
