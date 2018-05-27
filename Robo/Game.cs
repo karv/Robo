@@ -20,12 +20,6 @@ namespace Robo
 			Graphics = new GraphicsDeviceManager(this);
 		}
 
-		protected override void LoadContent()
-		{
-			base.LoadContent();
-			Content.Load<Microsoft.Xna.Framework.Audio.SoundEffect>("laser pew");
-		}
-
 		protected override void Initialize()
 		{
 			base.Initialize();

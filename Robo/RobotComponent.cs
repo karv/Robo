@@ -8,6 +8,7 @@ namespace Robo
 	{
 		/// Gets the robot owner.
 		public Robot Owner { get; private set; }
+
 		public string Name { get; }
 		public Vector2 RelativeUndeployedPosition { get; set; }
 		//public Vector2 AbsolutePosition => RelativePosition + Owner. new PointF(RelativePosition.X + Owner.Position.Left, RelativePosition.Y + Owner.Position.Top);
@@ -15,9 +16,10 @@ namespace Robo
 		public RobotComponent(string name)
 		{
 			if (string.IsNullOrWhiteSpace(name))
-				throw new System.ArgumentException("Invalid name.", nameof(name));
+				throw new ArgumentException("Invalid name.", nameof(name));
 			Name = name.Trim();
 		}
+
 		/// Detach this components from its robot.
 		public void Detach()
 		{

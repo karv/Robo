@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
@@ -9,7 +10,6 @@ namespace Robo
 	public abstract class Projectile : IGameEntity, IDisposable, ICollisionable
 	{
 		public bool Visible { get; set; }
-
 		public Game Game => (Game)Screen.Game;
 		public DeployedRobot Origin { get; set; }
 		public BattleScreen Screen { get; }
@@ -40,14 +40,19 @@ namespace Robo
 		}
 
 		public virtual RectangleF GetCollisionRectangle() => new RectangleF(Position, new Size2(1, 1));
+
 		public virtual bool ExistCollisionWith(ICollisionable other) => true;
 
 		public abstract void Draw(SpriteBatch batch);
 
-		public virtual void Initialize() { }
+		public virtual void Initialize()
+		{
+		}
 
 		public abstract void Update(GameTime gameTime);
 
-		public virtual void Dispose() { }
+		public virtual void Dispose()
+		{
+		}
 	}
 }

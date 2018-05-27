@@ -8,11 +8,7 @@ namespace Robo
 {
 	public class DeployedRobotLaserCannon : IDeployedRobotComponent
 	{
-		public RobotLaserCannon Prototype { get; }
-		public DeployedRobot Robot { get; }
-		public Vector2 Center => Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft;
-		public float CurrentAim { get; private set; }
-		public float TargetAim { get; set; } // TODO: Force value between -pi and pi
+		public static Color Color => Color.DarkBlue;
 
 		public bool AimOnTarget
 		{
@@ -25,6 +21,11 @@ namespace Robo
 			}
 		}
 
+		public Vector2 Center => Prototype.RelativeUndeployedPosition + Robot.Position.TopLeft;
+		public float CurrentAim { get; private set; }
+		public RobotLaserCannon Prototype { get; }
+		public DeployedRobot Robot { get; }
+		public float TargetAim { get; set; } // TODO: Force value between -pi and pi
 		RobotComponent IDeployedRobotComponent.Prototype => Prototype;
 
 		public DeployedRobotLaserCannon(DeployedRobot robot, RobotLaserCannon prototype)
@@ -47,28 +48,6 @@ namespace Robo
 			Robot.Resources[ResourceType.Energy] -= energyOutput;
 			CreateAndFireBeam(energyOutput);
 			return energyOutput;
-		}
-
-		SlowLaserBeam CreateLaserBeam(float energy)
-		{
-			var ret = new SlowLaserBeam(Robot.Screen)
-			{
-				Energy = energy,
-				EnergyLoseRatio = 0.5f,
-				Direction = new Vector2((float)Math.Cos(CurrentAim), (float)Math.Sin(CurrentAim)),
-				Velocity = 400,
-				Position = Center,
-				Origin = Robot
-			};
-			ret.Dissipated += (sender, e) => Debug.WriteLine("Beam discipated");
-			ret.Initialize();
-			return ret;
-		}
-
-		void CreateAndFireBeam(float energy)
-		{
-			var beam = CreateLaserBeam(energy);
-			beam.AddToBattlefield();
 		}
 
 		void Moggle.IDrawable.Draw(SpriteBatch batch)
@@ -94,6 +73,29 @@ namespace Robo
 			ResetEnergy();
 		}
 
+		void CreateAndFireBeam(float energy)
+		{
+			var beam = CreateLaserBeam(energy);
+			Prototype.FireSoundEffect.Play();
+			beam.AddToBattlefield();
+		}
+
+		SlowLaserBeam CreateLaserBeam(float energy)
+		{
+			var ret = new SlowLaserBeam(Robot.Screen)
+			{
+				Energy = energy,
+				EnergyLoseRatio = 0.5f,
+				Direction = new Vector2((float)Math.Cos(CurrentAim), (float)Math.Sin(CurrentAim)),
+				Velocity = 400,
+				Position = Center,
+				Origin = Robot
+			};
+			ret.Dissipated += (sender, e) => Debug.WriteLine("Beam discipated");
+			ret.Initialize();
+			return ret;
+		}
+
 		[Conditional("DEBUG")]
 		void ResetEnergy(float newEnergy = 1)
 		{
@@ -102,14 +104,12 @@ namespace Robo
 
 		/// Occurs when aim reached its target rotation.
 		public event EventHandler AimReachedTarget;
-		bool _aimOnTarget;
 
-		public const float Radius = 30;
 		public const float AimLength = 40;
+		public const float AimRotationSpeed = 1f;
+		public const float Radius = 30;
 		public const int Sides = 10;
 		public const int Thickness = 10;
-		public const float AimRotationSpeed = 1f;
-
-		public static Color Color => Color.DarkBlue;
+		bool _aimOnTarget;
 	}
 }
