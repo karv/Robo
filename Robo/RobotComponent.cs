@@ -1,15 +1,16 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace Robo
 {
 	/// A component of a robot.
 	public abstract class RobotComponent : IRobotComponent
 	{
+		public string Name { get; }
+
 		/// Gets the robot owner.
 		public Robot Owner { get; private set; }
 
-		public string Name { get; }
 		public Vector2 RelativeUndeployedPosition { get; set; }
 		//public Vector2 AbsolutePosition => RelativePosition + Owner. new PointF(RelativePosition.X + Owner.Position.Left, RelativePosition.Y + Owner.Position.Top);
 
@@ -18,13 +19,6 @@ namespace Robo
 			if (string.IsNullOrWhiteSpace(name))
 				throw new ArgumentException("Invalid name.", nameof(name));
 			Name = name.Trim();
-		}
-
-		/// Detach this components from its robot.
-		public void Detach()
-		{
-			if (Owner is null) throw new InvalidOperationException("Item already detached.");
-			Owner.Componets.Remove(this);
 		}
 
 		/// Attach this components to the specified robot.
@@ -39,5 +33,12 @@ namespace Robo
 		}
 
 		public abstract IDeployedRobotComponent CreateDeploy(DeployedRobot robot);
+
+		/// Detach this components from its robot.
+		public void Detach()
+		{
+			if (Owner is null) throw new InvalidOperationException("Item already detached.");
+			Owner.Componets.Remove(this);
+		}
 	}
 }

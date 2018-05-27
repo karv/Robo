@@ -1,5 +1,5 @@
-﻿using MonoGame.Extended;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace Robo
 {
@@ -7,6 +7,7 @@ namespace Robo
 	{
 		public Vector2 DefaultPosition { get; }
 		public float DefaultZoom { get; }
+
 		public GameCamera(MonoGame.Extended.ViewportAdapters.ViewportAdapter viewportAdapter) : base(viewportAdapter)
 		{
 			DefaultPosition = Position;

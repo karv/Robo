@@ -5,12 +5,10 @@ namespace Robo
 	/// Main game class
 	public class Game : Moggle.Game
 	{
-		public GraphicsDeviceManager Graphics { get; }
-		public CollisionChecker CollitionChecker;
-		public ObjectDisplacer Displacer;
-
 		/// Gets the collection of entities.
 		public EntityCollection Entities { get; }
+
+		public GraphicsDeviceManager Graphics { get; }
 
 		///
 		public Game()
@@ -33,5 +31,8 @@ namespace Robo
 		/// Initialize all entities.
 		protected void InitializeRegisteredEntities()
 		{ foreach (var entity in Entities) entity.Initialize(); }
+
+		public CollisionChecker CollitionChecker;
+		public ObjectDisplacer Displacer;
 	}
 }

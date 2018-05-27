@@ -1,5 +1,4 @@
 ﻿using System;
-using MonoGame.Extended;
 
 namespace Robo
 {
@@ -11,6 +10,5 @@ namespace Robo
 		{
 			Rnd = new Random();
 		}
-
 	}
 }

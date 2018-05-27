@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Robo
 {
 	public class Battlefield : Moggle.IDrawable, IGameComponent
 	{
+		public RectangleF BattleArea { get; }
+		public Color FloorColor { get; set; } = Color.Brown;
+		public float FloorHeight { get; } = 50;
 		public List<DeployedRobot> Robots { get; }
 		public BattleScreen Screen { get; }
-		public float FloorHeight { get; } = 50; // Do not set because may mess the positions.
-		public Color FloorColor { get; set; } = Color.Brown;
-		public RectangleF BattleArea { get; }
+
+		// Do not set because may mess the positions.
 		public Battlefield(BattleScreen screen)
 		{
 			Screen = screen ?? throw new ArgumentNullException(nameof(screen));
@@ -26,11 +28,14 @@ namespace Robo
 			Robots = new List<DeployedRobot>();
 		}
 
-		public void Initialize() { }
 		public void Draw(SpriteBatch batch)
 		{
 			DrawBattlefield(batch);
 			DrawFieldEntities(batch);
+		}
+
+		public void Initialize()
+		{
 		}
 
 		void DrawBattlefield(SpriteBatch batch)

@@ -8,8 +8,8 @@ namespace Robo
 	public class CollisionChecker : IGameComponent, IUpdate
 	{
 		public Game Game { get; }
-		public BattleScreen Screen;
 		List<ICollisionRule> _rules { get; } = new List<ICollisionRule>();
+
 		public CollisionChecker(BattleScreen screen)
 		{
 			Screen = screen ?? throw new ArgumentNullException(nameof(screen));
@@ -19,21 +19,13 @@ namespace Robo
 			_rules.Add(BeamToRobotCollisionRule.Rule);
 		}
 
-		public void RegisterNewRule(ICollisionRule rule) => _rules.Add(rule ?? throw new ArgumentNullException(nameof(rule)));
-
 		/// Determines whether the line between two points is empty and so is safe to "travel".
 		public bool IsIntervalEmpty(Vector2 A, Vector2 B)
 		{
 			throw new NotImplementedException();
 		}
 
-		void IGameComponent.Initialize() { }
-
-		bool Collision(ICollisionable objA, ICollisionable objB)
-		{
-			return RectangleF.Intersects(objA.GetCollisionRectangle(), objB.GetCollisionRectangle()) &&
-											 (objA.ExistCollisionWith(objB) || objB.ExistCollisionWith(objA));
-		}
+		public void RegisterNewRule(ICollisionRule rule) => _rules.Add(rule ?? throw new ArgumentNullException(nameof(rule)));
 
 		public void Update(GameTime gameTime)
 		{
@@ -54,5 +46,17 @@ namespace Robo
 						}
 				}
 		}
+
+		void IGameComponent.Initialize()
+		{
+		}
+
+		bool Collision(ICollisionable objA, ICollisionable objB)
+		{
+			return RectangleF.Intersects(objA.GetCollisionRectangle(), objB.GetCollisionRectangle()) &&
+											 (objA.ExistCollisionWith(objB) || objB.ExistCollisionWith(objA));
+		}
+
+		public BattleScreen Screen;
 	}
 }

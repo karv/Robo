@@ -1,5 +1,4 @@
-﻿using System;
-namespace Robo
+﻿namespace Robo
 {
 	public class BeamToRobotCollisionRule : CollisionRule<Projectile, DeployedRobot>
 	{

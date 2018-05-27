@@ -9,12 +9,18 @@ namespace Robo
 	/// A robot during combat.
 	public class DeployedRobot : GameEntity, ICollisionable
 	{
+		public static Size2 Size { get; }
 		public Color Color { get; set; }
-		public Robot Robot { get; }
-		public Battlefield Battlefield => Screen.Battlefield;
-		public BattleScreen Screen { get; }
 		public RobotResourceManager Resources { get; }
+		public Robot Robot { get; }
+		public BattleScreen Screen { get; }
+		public Battlefield Battlefield => Screen.Battlefield;
 		List<IDeployedRobotComponent> _parts { get; }
+
+		static DeployedRobot()
+		{
+			Size = new Size2(100, 50);
+		}
 
 		public DeployedRobot(Robot robot, BattleScreen screen)
 		{
@@ -36,7 +42,22 @@ namespace Robo
 			}
 		}
 
-		/// Adds this robot into the battlefield, initializes all the required components, and add it into the screen draw and update list.
+		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
+		{
+			batch.FillRectangle(Position, Color);
+		}
+
+		public IDeployedRobotComponent GetComponent(string id)
+		{
+			// TODO: existence check.
+			return _parts.First(z => string.Equals(z.Prototype.Name, id, StringComparison.InvariantCultureIgnoreCase));
+		}
+
+		public override void Initialize()
+		{ foreach (var c in _parts) c.Initialize(); }
+
+		/// Adds this robot into the battlefield, initializes all the required components, and add it
+		/// into the screen draw and update list.
 		public void PutInBattlefield()
 		{
 			//Initialize();
@@ -46,28 +67,10 @@ namespace Robo
 			Battlefield.Robots.Add(this);
 		}
 
-		public override void Initialize()
-		{ foreach (var c in _parts) c.Initialize(); }
-
-		public IDeployedRobotComponent GetComponent(string id)
-		{
-			// TODO: existence check.
-			return _parts.First(z => string.Equals(z.Prototype.Name, id, StringComparison.InvariantCultureIgnoreCase));
-		}
-
-		public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
-		{
-			batch.FillRectangle(Position, Color);
-		}
+		bool ICollisionable.ExistCollisionWith(ICollisionable other) => true;
 
 		RectangleF ICollisionable.GetCollisionRectangle() => Position;
 
-		bool ICollisionable.ExistCollisionWith(ICollisionable other) => true; // Always collision in my box.
-
-		public static Size2 Size { get; }
-		static DeployedRobot()
-		{
-			Size = new Size2(100, 50);
-		}
+		// Always collision in my box.
 	}
 }

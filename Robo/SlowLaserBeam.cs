@@ -7,6 +7,10 @@ namespace Robo
 {
 	public class SlowLaserBeam : InertialProjectile
 	{
+		public static Color Color => Color.Red;
+
+		public Vector2 Direction { get; set; }
+
 		public float Energy
 		{
 			get => _energy;
@@ -23,14 +27,16 @@ namespace Robo
 
 		public float EnergyLoseRatio { get; set; }
 
-		public Vector2 Direction { get; set; } //TODO: Force unitary or zero.
+		//TODO: Force unitary or zero.
 		public float Velocity
 		{
 			get => InertialVelocity.Length();
 			set => InertialVelocity = Direction * value;
 		}
 
-		public SlowLaserBeam(BattleScreen screen) : base(screen) { }
+		public SlowLaserBeam(BattleScreen screen) : base(screen)
+		{
+		}
 
 		public override void Draw(SpriteBatch batch)
 		{
@@ -49,10 +55,9 @@ namespace Robo
 
 		/// Occurs when it lost all of its energy.
 		public event EventHandler Dissipated;
-		float _energy;
 
 		public const float Length = 100;
 		public const int Thickness = 7;
-		public static Color Color => Color.Red;
+		float _energy;
 	}
 }

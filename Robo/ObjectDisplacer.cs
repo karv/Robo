@@ -1,5 +1,4 @@
 ﻿using System;
-using CE;
 using Microsoft.Xna.Framework;
 
 namespace Robo
@@ -8,11 +7,11 @@ namespace Robo
 	{
 		public Game Game { get; }
 		CollisionChecker _collitionChecker => Game.CollitionChecker;
+
 		public ObjectDisplacer(Game game)
 		{
 			Game = game ?? throw new ArgumentNullException(nameof(game));
 		}
-
 
 		public void Displace(IGameEntity entity, Vector2 vector, bool continuous = false)
 		{
