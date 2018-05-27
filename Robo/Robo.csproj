@@ -60,7 +60,6 @@
     <Compile Include="InertialProjectile.cs" />
     <Compile Include="IRobotComponent.cs" />
     <Compile Include="ObjectDisplacer.cs" />
-    <Compile Include="Painter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
